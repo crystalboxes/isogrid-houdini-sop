@@ -86,7 +86,7 @@ DisableFormat: false
 IndentCaseLabels: false
 
 # The number of columns to use for indentation.
-IndentWidth: 4
+IndentWidth: 2
 
 # Indent if a function definition or declaration is wrapped after the type.
 IndentWrappedFunctionNames: false
@@ -161,7 +161,7 @@ Standard: Cpp11
 TabWidth: 4
 
 # The way to use tab characters in the resulting file. Possible values: Never, ForIndentation, Always.
-UseTab: ForIndentation
+UseTab: Never
 
 # Do not reflow comments
 ReflowComments: false
