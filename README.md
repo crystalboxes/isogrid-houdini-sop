@@ -12,7 +12,7 @@ This is a C++ port of [isogrid](https://github.com/wblut/isogrid) Processing lib
 From the repository folder:
 
 ```
-	mkdir build ; cd build
+    mkdir build ; cd build
     cmake .. -DHFS="C:/Program Files/Side Effects Software/Houdini 16.5.405"
     cmake --build . --config Release
 ```
