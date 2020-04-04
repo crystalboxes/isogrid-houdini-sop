@@ -3,7 +3,7 @@ add_library(isogrid STATIC
   include/WB_IsoGridSegment.h
   include/WB_IsoGridCell.h
   include/WB_IsoGridLine.h
-  include/WB_CubeGridExporter.cpp
+  include/WB_CubeGridExporter.h
   
   src/WB_IsoHexGrid.cpp
   src/WB_IsoGridSegment.cpp

@@ -114,7 +114,9 @@ PRM_Name names[] = { PRM_Name(CommandParmName),
                      PRM_Name("MirrorLPlane", "Mirror L Plane"),
                      PRM_Name("MirrorIKPlane", "Mirror IK Plane"),
                      PRM_Name("ResetSameNoiseSeed", "Reset Same NoiseSeed"),
-                     PRM_Name("ResetNewNoiseSeed", "Reset New NoiseSeed") };
+                     PRM_Name("ResetNewNoiseSeed", "Reset New NoiseSeed"),
+                     PRM_Name("orient_polys", "Orient Polygons") };
+PRM_Default defaultToggle(1);
 PRM_Template templates[] = {
   PRM_Template(PRM_STRING, 1, &names[0]), //
   // ADD_PRM_CALLBACK_JOIN(33, ResetSameNoiseSeed), //
@@ -158,7 +160,8 @@ PRM_Template templates[] = {
   ADD_PRM_CALLBACK_JOIN(31, MirrorLPlane), //
   ADD_PRM_CALLBACK(32, MirrorIKPlane), //
   PRM_Template(PRM_SEPARATOR), //
-  PRM_Template(PRM_CALLBACK, 1, &clearName, 0, 0, 0, isogrid_sop::clear_commands),
+  PRM_Template(PRM_CALLBACK, 1, &clearName, 0, 0, 0, isogrid_sop::clear_commands), //
+  PRM_Template(PRM_TOGGLE, 1, &names[35], &defaultToggle), //
   PRM_Template(PRM_LABEL, 1, &consoleOutName), //
   PRM_Template() //
 }; // namespace isogrid_sop
@@ -258,12 +261,13 @@ void getNextCommands(SOP_IsoGrid *isogrid, float t, std::vector<Commands> &comma
 
 void SOP_IsoGrid::build(GU_Detail *dst, OP_Context &context)
 {
+  float t = context.getTime();
   std::vector<Commands> commands;
   std::string currentCommand;
 
   UT_AutoInterrupt boss("Building isogrid");
 
-  getNextCommands(this, context.getTime(), commands, currentCommand);
+  getNextCommands(this, t, commands, currentCommand);
   auto &a = *instance;
 
 #if DLOG
@@ -301,8 +305,12 @@ void SOP_IsoGrid::build(GU_Detail *dst, OP_Context &context)
         prim->close();
       });
   setString(UT_String(a.getConsoleOutput()), //
-            CH_StringMeaning::CH_STRING_LITERAL, "ConsoleOut", 0, context.getTime());
+            CH_StringMeaning::CH_STRING_LITERAL, "ConsoleOut", 0, t);
 
+  if (evalInt(UT_String("orient_polys"), 0, 0, t))
+  {
+    gdp->orient();
+  }
   gdp->getP()->bumpDataId();
 
 #if DLOG
