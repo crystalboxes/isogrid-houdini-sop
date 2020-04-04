@@ -27,8 +27,8 @@ namespace isogrid_sop
   PRM_Template((PRM_Type)(PRM_CALLBACK | PRM_TYPE_JOIN_NEXT), 1, &names[ID], 0, 0, 0, isogrid_sop::callback_##NAME)
 
 const char *CommandParmName = "Command";
-PRM_Name clearName = "Clear";
-PRM_Name consoleOutName = "ConsoleOut";
+PRM_Name clearName("Clear");
+PRM_Name consoleOutName("ConsoleOut");
 
 ADD_CALLBACK(Maze);
 ADD_CALLBACK(PerlinNoise);
@@ -79,7 +79,7 @@ int clear_commands(void *data, int index, float t, const PRM_Template *)
   return 0;
 }
 
-PRM_Name names[] = { CommandParmName,
+PRM_Name names[] = { PRM_Name(CommandParmName),
                      PRM_Name("Maze", "Maze"),
                      PRM_Name("PerlinNoise", "Perlin Noise"),
                      PRM_Name("PerlinNoise2", "Perlin Noise 2"),
