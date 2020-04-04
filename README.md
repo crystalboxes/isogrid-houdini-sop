@@ -1,5 +1,8 @@
 # isogrid Houdini SOP
 
+![A](https://media.giphy.com/media/Yrfx3lUESu9V9YG2VO/giphy.gif)
+![B](https://media.giphy.com/media/dXQhYcHP9n1EVtsorT/giphy.gif)
+
 This is a C++ port of [isogrid](https://github.com/wblut/isogrid) Processing library by [wblut](https://twitter.com/wblut) with a Houdini plugin.
 
 ## Requirements
